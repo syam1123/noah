@@ -10,4 +10,3 @@ settings.json
 node_modules/
 static/
 .venv/
-noah_frontend/dist/
