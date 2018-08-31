@@ -68,9 +68,10 @@ class DonateView extends React.Component {
         let { formErr } = this.state;
         let errors = {}
         const phoneRegex = /^\d{10}$/,
-              pinCodeRegex = /^\d{6}$/
-        if (!phoneRegex.test(donationForm['contact_number'].value)) {
-          errors.contact_number = 'Enter 10 digit mobile number'
+              pinCodeRegex = /^\d{6}$/,
+              landPhoneRegex = /^0\d{10}$/;
+        if (!(phoneRegex.test(donationForm['contact_number'].value) || landPhoneRegex.test(donationForm['contact_number'].value))) {
+          errors.contact_number = 'Enter 10 digit mobile number or 11 digit landline number'
         } else if(formErr.contact_number){
           // remove existing error message
           formErr = {
