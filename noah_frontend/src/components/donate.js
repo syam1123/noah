@@ -69,7 +69,8 @@ class DonateView extends React.Component {
         let errors = {}
         const phoneRegex = /^\d{10}$/,
               pinCodeRegex = /^\d{6}$/,
-              landPhoneRegex = /^0\d{10}$/;
+              landPhoneRegex = /^0\d{10}$/,
+              nameRegex = /^[a-zA-Z][a-zA-Z0-9.,$;]+$/
         if (!(phoneRegex.test(donationForm['contact_number'].value) || landPhoneRegex.test(donationForm['contact_number'].value))) {
           errors.contact_number = 'Enter 10 digit mobile number or 11 digit landline number'
         } else if(formErr.contact_number){
@@ -86,6 +87,16 @@ class DonateView extends React.Component {
           formErr = {
             ...formErr,
             pincode: ''
+          }
+        }
+
+        if (!nameRegex.test(donationForm['full_name'].value)) {
+          errors.full_name = 'Enter a valid name'
+        } else if(formErr.full_name){
+          // remove existing error message
+          formErr = {
+            ...formErr,
+            full_name: ''
           }
         }
         this.setState({formErr: {...formErr, ...errors}})
@@ -145,6 +156,9 @@ class DonateView extends React.Component {
                     <div className="col-6 form-group">
                         <label>Your Full Name</label>
                         <input name="full_name" className="form-control" type="text" required />
+                        {formErr['full_name'] &&
+                            <FormError>{formErr['full_name']}</FormError>
+                        }
                     </div>
                     <div className="col-6 form-group">
                         <label>Contact Number</label>
