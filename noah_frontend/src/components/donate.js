@@ -43,7 +43,7 @@ class DonateView extends React.Component {
         return this.items.map(i => (
             <tr key={i}>
                 <td><label>{i}</label></td>
-                <td><input className="form-control" type="number" defaultValue="0" name={i} /></td>
+                <td><input className="form-control" type="number" defaultValue="0" name={i} min="0"/></td>
             </tr>
         ))
     }
@@ -55,6 +55,10 @@ class DonateView extends React.Component {
     addItem = (e) => {
         e.preventDefault()
         const name = prompt("Enter name of the Item")
+        if (this.items.includes(name)) {
+          alert(`${name} already present in the list`)
+          return
+        }
         if (name && name.length > 0)
             this.props.dispatch(addCustomItem(name))
     }
