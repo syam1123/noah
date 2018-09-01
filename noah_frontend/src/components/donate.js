@@ -46,6 +46,11 @@ class DonateView extends React.Component {
     addItem = (e) => {
         e.preventDefault()
         const name = prompt("Enter name of the Item")
+        const nameRegex = /^[a-zA-Z][a-zA-Z0-9.,$;]+$/
+        if (!nameRegex.test(name)){
+          alert('Enter a valid item name. Eg: Drawing table')
+          return
+        }
         if (name && name.length > 0)
             this.props.dispatch(addCustomItem(name))
     }
