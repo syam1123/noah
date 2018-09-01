@@ -1,5 +1,5 @@
 import React from 'react'
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'
 import styled from 'styled-components'
 
 import {APIService} from '../services/api'
@@ -69,11 +69,11 @@ class DonateView extends React.Component {
      * @return {object}              List of errors
      */
     validateDonationForm = (donationForm) => {
-        let { formErr } = this.state;
+        let { formErr } = this.state
         let errors = {}
         const phoneRegex = /^\d{10}$/,
               pinCodeRegex = /^\d{6}$/,
-              landPhoneRegex = /^0\d{10}$/;
+              landPhoneRegex = /^0\d{10}$/
         if (!(phoneRegex.test(donationForm['contact_number'].value) || landPhoneRegex.test(donationForm['contact_number'].value))) {
           errors.contact_number = 'Enter 10 digit mobile number or 11 digit landline number'
         } else if(formErr.contact_number){
@@ -94,7 +94,7 @@ class DonateView extends React.Component {
         }
         this.setState({formErr: {...formErr, ...errors}})
 
-        return errors;
+        return errors
     }
 
     registerDonation =  (e) => {
@@ -118,7 +118,7 @@ class DonateView extends React.Component {
     }
 
     render() {
-        const { formErr } = this.state;
+        const { formErr } = this.state
         return (
 <section id="donate" className="mx-auto" style={{maxWidth: "800px"}}>
     <div className="container">
@@ -209,6 +209,6 @@ class DonateView extends React.Component {
 
 const mapStateToProps = (state) => ({
     choices: state.choices
-});
+})
 
-export default connect(mapStateToProps)(DonateView);
+export default connect(mapStateToProps)(DonateView)
